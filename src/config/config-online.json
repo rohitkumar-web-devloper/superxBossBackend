@@ -1,0 +1,25 @@
+{
+  "development": {
+    "username": "super629",
+    "password": "3M3skXNMED9p8",
+    "database": "super629",
+    "host": "localhost",
+    "dialect": "mysql",
+    "logging": false
+  },
+  "test": {
+    "username": "super629",
+    "password": "3M3skXNMED9p8",
+    "database": "super629",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "super629",
+    "password": "3M3skXNMED9p8",
+    "database": "super629",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "logging": false
+}
