@@ -4,6 +4,7 @@ const TokenVerify = require("../../Middleware/TokenVerify")
 const { body } = require('express-validator');
 const { validate } = require("../../helper/validation")
 const { success, wrapRequestHandler, error } = require("../../helper/response")
+const { Create_Category } = require('../../Middleware/PermissionCheck')
 
 const handler = async (req, res) => {
     const { name, description, parent } = req.body;
@@ -31,7 +32,7 @@ const handler = async (req, res) => {
         res.json(error("Sub-Category Created failed", e))
     }
 }
-createRouter.post("/create-sub-category", TokenVerify(), validate([
+createRouter.post("/create-sub-category", TokenVerify(), Create_Category, validate([
     body("name").notEmpty().withMessage("Name field is required"),
 ]), wrapRequestHandler(handler));
 

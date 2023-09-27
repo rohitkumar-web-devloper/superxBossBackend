@@ -4,7 +4,7 @@ const TokenVerify = require("../../Middleware/TokenVerify")
 const { body } = require('express-validator');
 const { validate } = require("../../helper/validation")
 const { success, wrapRequestHandler, error } = require("../../helper/response")
-
+const { Update_Product } = require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
     const { vehicle_id, product_id, year, brand_id } = req.body
     const ro = JSON.stringify(vehicle_id)
@@ -45,4 +45,4 @@ const handler = async (req, res) => {
         return res.status(400).json(error("Enter Valid Details", e))
     }
 }
-createRouter.post("/product-list-brand-vehicle", TokenVerify(), wrapRequestHandler(handler));
+createRouter.post("/product-list-brand-vehicle", TokenVerify(), Update_Product, wrapRequestHandler(handler));

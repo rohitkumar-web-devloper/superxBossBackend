@@ -4,7 +4,7 @@ const TokenVerify = require("../../Middleware/TokenVerify");
 const { body } = require("express-validator");
 const { validate } = require("../../helper/validation");
 const { success, wrapRequestHandler, error } = require("../../helper/response");
-
+const { Created_Vehicle}= require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
   const { name, description, brand_id } = req.body;
   try {
@@ -33,6 +33,7 @@ const handler = async (req, res) => {
 createRouter.post(
   "/vehicle-segments",
   TokenVerify(),
+  Created_Vehicle,
   validate([body("name").notEmpty().withMessage("Name field is required")]),
   wrapRequestHandler(handler)
 );

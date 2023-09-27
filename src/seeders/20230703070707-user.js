@@ -1,5 +1,5 @@
 'use strict';
-const {User} = require('../models')
+const { User } = require('../models')
 const bcrypt = require('bcryptjs');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -19,6 +19,7 @@ module.exports = {
                 password: "admin123",
                 profile_picture: 'default-image.jpg',
                 role: 1,
+                status: 1,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },

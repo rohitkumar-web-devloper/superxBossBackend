@@ -4,7 +4,7 @@ const TokenVerify = require("../../Middleware/TokenVerify")
 const { body } = require('express-validator');
 const { validate } = require("../../helper/validation")
 const { success, wrapRequestHandler, error } = require("../../helper/response")
-
+ const {Create_Shipping} = require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
 
     try {
@@ -19,7 +19,7 @@ const handler = async (req, res) => {
         return res.json(error("Enter Valid Details", e))
     }
 }
-createRouter.post("/shipping-state-create", TokenVerify(), validate([
+createRouter.post("/shipping-state-create", TokenVerify(), Create_Shipping, validate([
     body("state").notEmpty().withMessage("State field is required"),
     body("charge").notEmpty().withMessage("Charge field is required")
 ]), wrapRequestHandler(handler));

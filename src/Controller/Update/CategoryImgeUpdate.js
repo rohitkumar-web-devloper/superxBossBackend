@@ -1,16 +1,16 @@
-const {updateRouter} = require('../../Routes/updateRoutes')
-const {Categories} = require("../../models")
+const { updateRouter } = require('../../Routes/updateRoutes')
+const { Categories } = require("../../models")
 const TokenVerify = require("../../Middleware/TokenVerify")
-const {uploadImage} = require('../Helper')
-const {success, wrapRequestHandler, error} = require("../../helper/response")
-const {body} = require('express-validator');
-const {validate} = require("../../helper/validation")
+const { uploadImage } = require('../Helper')
+const { success, wrapRequestHandler, error } = require("../../helper/response")
+const { body } = require('express-validator');
+const { validate } = require("../../helper/validation")
 const fs = require('fs')
-
+const { Update_Category } = require("../../Middleware/PermissionCheck")
 // its api use in update Image for category and subCategory
 const handler = async (req, res) => {
     try {
-        const {image} = req.files
+        const { image } = req.files
         if (image != null) {
             const data = await Categories.findOne({
                 attributes: ["icon"],
@@ -30,7 +30,7 @@ const handler = async (req, res) => {
                 })
             }
             const ImageUpload = await uploadImage(image, "upload/categories/")
-            const setImage = await Categories.update({icon: ImageUpload}, {
+            const setImage = await Categories.update({ icon: ImageUpload }, {
                 where: {
                     id: req.body.id
                 }
@@ -45,4 +45,4 @@ const handler = async (req, res) => {
 
 
 }
-updateRouter.put('/categoryImageUpload', TokenVerify(), wrapRequestHandler(handler))
+updateRouter.put('/categoryImageUpload', TokenVerify(), Update_Category, wrapRequestHandler(handler))

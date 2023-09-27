@@ -4,7 +4,7 @@ const TokenVerify = require("../../Middleware/TokenVerify")
 const { success, wrapRequestHandler, error } = require("../../helper/response")
 const { body } = require('express-validator');
 const { validate } = require("../../helper/validation")
-
+const { Create_Recharge} = require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
     const { amount, offer_amount } = req.body
     try {
@@ -16,7 +16,7 @@ const handler = async (req, res) => {
 
 
 }
-createRouter.post("/recharge-create", TokenVerify(), validate([
+createRouter.post("/recharge-create", TokenVerify(), Create_Recharge , validate([
     body("amount").notEmpty().withMessage("Amount is requried"),
     body("offer_amount").notEmpty().withMessage("Offer Amount is requried"),
 ]), wrapRequestHandler(handler));

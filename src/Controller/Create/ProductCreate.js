@@ -5,6 +5,7 @@ const { body } = require('express-validator');
 const { uploadImage } = require('../Helper')
 const { validate } = require("../../helper/validation")
 const { success, wrapRequestHandler, error } = require("../../helper/response")
+const { Create_Product } = require("../../Middleware/PermissionCheck")
 const handler = async (req, res) => {
     try {
         const Images = req.files?.new_image
@@ -44,7 +45,7 @@ const handler = async (req, res) => {
     }
 
 }
-createRouter.post("/create-product", TokenVerify(), validate([
+createRouter.post("/create-product", TokenVerify(), Create_Product, validate([
     body("name").notEmpty().withMessage("Name is requried"),
     body("part_no").notEmpty().withMessage("Part Number is requried"),
     body("price").notEmpty().withMessage("Price is requried"),

@@ -4,6 +4,7 @@ const TokenVerify = require("../../Middleware/TokenVerify")
 const { success, wrapRequestHandler, error } = require("../../helper/response")
 const { uploadImage } = require('../Helper')
 const fs = require('fs')
+const { Update_User } = require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
     try {
         const Image = req.files?.profile_picture
@@ -46,4 +47,4 @@ const handler = async (req, res) => {
     }
 }
 
-updateRouter.put('/user-details-update', TokenVerify(), wrapRequestHandler(handler))
+updateRouter.put('/user-details-update', TokenVerify(), Update_User, wrapRequestHandler(handler))

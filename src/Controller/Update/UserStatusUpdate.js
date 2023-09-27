@@ -1,10 +1,11 @@
-const {updateRouter} = require('../../Routes/updateRoutes')
-const {User} = require("../../models")
+const { updateRouter } = require('../../Routes/updateRoutes')
+const { User } = require("../../models")
 const TokenVerify = require("../../Middleware/TokenVerify")
-const {success, wrapRequestHandler, error} = require("../../helper/response")
+const { success, wrapRequestHandler, error } = require("../../helper/response")
+const { Update_User } = require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
     try {
-        const data = await User.update({status: !req.body.statusId}, {
+        const data = await User.update({ status: !req.body.statusId }, {
             where: {
                 id: req.body.id,
             }
@@ -17,4 +18,4 @@ const handler = async (req, res) => {
     }
 }
 
-updateRouter.put('/user-status-update', TokenVerify(), wrapRequestHandler(handler))
+updateRouter.put('/user-status-update', TokenVerify(), Update_User, wrapRequestHandler(handler))

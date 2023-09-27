@@ -4,7 +4,7 @@ const { Rating } = require("../../models")
 const TokenVerify = require("../../Middleware/TokenVerify")
 const { success, wrapRequestHandler } = require("../../helper/response")
 const { validate } = require("../../helper/validation")
-
+const { Update_Rating } = require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
     try {
         const result = await Rating.update(req.body, {
@@ -17,4 +17,4 @@ const handler = async (req, res) => {
         res.json(error("Rating Status Update Error", e))
     }
 }
-updateRouter.put('/rating-update', TokenVerify(), wrapRequestHandler(handler))
+updateRouter.put('/rating-update', TokenVerify(), Update_Rating, wrapRequestHandler(handler))

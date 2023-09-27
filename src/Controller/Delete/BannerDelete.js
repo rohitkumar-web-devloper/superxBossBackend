@@ -2,7 +2,7 @@ const { deleteRouter } = require('../../Routes/deleteRoutes')
 const { Banner } = require("../../models")
 const TokenVerify = require("../../Middleware/TokenVerify")
 const { success, wrapRequestHandler, error } = require("../../helper/response")
-
+const { Delete_Banner } = require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
     try {
         const banner = await Banner.destroy({
@@ -15,4 +15,4 @@ const handler = async (req, res) => {
         res.json(error("Banner Removed Error", err))
     }
 }
-deleteRouter.delete('/banner-remove', TokenVerify(), wrapRequestHandler(handler))
+deleteRouter.delete('/banner-remove', TokenVerify(), Delete_Banner, wrapRequestHandler(handler))

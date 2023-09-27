@@ -6,6 +6,7 @@ const { success, wrapRequestHandler } = require("../../helper/response")
 const { validate } = require("../../helper/validation")
 const { uploadImage } = require('../Helper')
 const fs = require('fs')
+const { Update_Product } = require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
     try {
         const { deleted_image, product_id, name, price, b2b_price, any_discount, brand_id, item_stock, sku_id, weight, tax_rate, hsn_code, ship_days, return_days, return_policy, point, part_no, segment_type, min_qty, unit, bulkData } = req?.body
@@ -75,6 +76,6 @@ const handler = async (req, res) => {
         res.status(400).json(error("Product update Error ", e))
     }
 }
-updateRouter.put('/edit-product', TokenVerify(), validate([
+updateRouter.put('/edit-product', TokenVerify(), Update_Product, validate([
     body("name").notEmpty().withMessage("Name is require"),
 ]), wrapRequestHandler(handler))

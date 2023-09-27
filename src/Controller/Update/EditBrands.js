@@ -1,8 +1,9 @@
-const {updateRouter} = require('../../Routes/updateRoutes')
-const {Brand} = require("../../models")
+const { updateRouter } = require('../../Routes/updateRoutes')
+const { Brand } = require("../../models")
 const TokenVerify = require("../../Middleware/TokenVerify")
-const {success, wrapRequestHandler, error} = require("../../helper/response")
-const handler = async  (req , res)=>{
+const { success, wrapRequestHandler, error } = require("../../helper/response")
+const { Update_Brand } = require('../../Middleware/PermissionCheck')
+const handler = async (req, res) => {
     console.log(req.body)
     try {
         const editData = await Brand.update(req.body, {
@@ -10,9 +11,9 @@ const handler = async  (req , res)=>{
                 id: req.body.brandId
             }
         })
-       res.json(success("Brand updated"))
+        res.json(success("Brand updated"))
     } catch (e) {
         res.json(error("Brand is not update"))
     }
 }
-updateRouter.put('/edit-brand', TokenVerify(),wrapRequestHandler(handler))
+updateRouter.put('/edit-brand', TokenVerify(), Update_Brand, wrapRequestHandler(handler))

@@ -2,6 +2,7 @@ const { updateRouter } = require('../../Routes/updateRoutes')
 const { Products } = require("../../models")
 const TokenVerify = require("../../Middleware/TokenVerify")
 const { success, wrapRequestHandler, error } = require("../../helper/response")
+const { Update_Product } = require("../../Middleware/PermissionCheck")
 const handler = async (req, res) => {
     try {
         const { id, new_arrival, trend_part, pop_item } = req?.body
@@ -25,4 +26,4 @@ const handler = async (req, res) => {
         res.json(error("featured is not update", e))
     }
 }
-updateRouter.put('/product-trend-status', TokenVerify(), wrapRequestHandler(handler))
+updateRouter.put('/product-trend-status', TokenVerify(), Update_Product, wrapRequestHandler(handler))

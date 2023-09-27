@@ -1,5 +1,5 @@
 'use strict';
-const {Permission} = require('../models')
+const { Permission } = require('../models')
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
@@ -12,295 +12,155 @@ module.exports = {
          *   isBetaMember: false
          * }], {});
          */
-        await queryInterface.bulkInsert('Permissions',  [
+        await queryInterface.bulkInsert('Permissions', [
             {
-                name: 'CREATE_DEPARTMENT',
-                code: 'CREATE_DEPARTMENT',
-                heading: "Department",
+                name: 'CREATE_CATEGORY',
+                heading: "Category",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
             {
-                name: 'UPDATE_DEPARTMENT',
-                code: 'UPDATE_DEPARTMENT',
-                heading: "Department",
+                name: 'UPDATE_CATEGORY',
+                heading: "Category",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
             {
-                name: 'READ_DEPARTMENT',
-                code: 'READ_DEPARTMENT',
-                heading: "Department",
+                name: 'CREATE_BRAND',
+                heading: "Brand",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
             {
-                name: 'DELETE_DEPARTMENT',
-                code: 'DELETE_DEPARTMENT',
-                heading: "Department",
+                name: 'UPDATE_BRAND',
+                heading: "Brand",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
             {
-                name: 'CREATE_ROLE',
-                code: 'CREATE_ROLE',
-                heading: "Role",
+                name: 'CREATE_VEHICLE',
+                heading: "Vehicle",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
             {
-                name: 'UPDATE_ROLE',
-                code: 'UPDATE_ROLE',
-                heading: "Role",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'READ_ROLE',
-                code: 'READ_ROLE',
-                heading: "Role",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'DELETE_ROLE',
-                code: 'DELETE_ROLE',
-                heading: "Role",
+                name: 'UPDATE_VEHICLE',
+                heading: "Vehicle",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
 
-            {
-                name: 'CREATE_BRANCH',
-                code: 'CREATE_BRANCH',
-                heading: "Branch",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'UPDATE_BRANCH',
-                code: 'UPDATE_BRANCH',
-                heading: "Branch",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'READ_BRANCH',
-                code: 'READ_BRANCH',
-                heading: "Branch",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'DELETE_BRANCH',
-                code: 'DELETE_BRANCH',
-                heading: "Branch",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
 
             {
-                name: 'CREATE_LEAD',
-                code: 'CREATE_LEAD',
-                heading: "Lead",
+                name: 'CREATE_PRODUCT',
+                heading: "Product",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
             {
-                name: 'UPDATE_LEAD',
-                code: 'UPDATE_LEAD',
-                heading: "Lead",
+                name: 'UPDATE_PRODUCT',
+                heading: "Product",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
-            {
-                name: 'READ_LEAD',
-                code: 'READ_LEAD',
-                heading: "Lead",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'DELETE_LEAD',
-                code: 'DELETE_LEAD',
-                heading: "Lead",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-
-            {
-                name: 'CREATE_FEES',
-                code: 'CREATE_FEES',
-                heading: "Fees",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'UPDATE_FEES',
-                code: 'UPDATE_FEES',
-                heading: "Fees",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'READ_FEES',
-                code: 'READ_FEES',
-                heading: "Fees",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'DELETE_FEES',
-                code: 'DELETE_FEES',
-                heading: "Fees",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-
             {
                 name: 'CREATE_USER',
-                code: 'CREATE_USER',
                 heading: "User",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
             {
                 name: 'UPDATE_USER',
-                code: 'UPDATE_USER',
                 heading: "User",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
             {
-                name: 'READ_USER',
-                code: 'READ_USER',
-                heading: "User",
+                name: 'UPDATE_CUSTOMER',
+                heading: "Customer",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
             {
-                name: 'DELETE_USER',
-                code: 'DELETE_USER',
-                heading: "User",
+                name: 'CREATE_FAQ',
+                heading: "Faq",
+                createdAt: new Date(),
+                updatedAt: new Date()
+            },
+            {
+                name: 'UPDATE_FAQ',
+                heading: "Faq",
+                createdAt: new Date(),
+                updatedAt: new Date()
+            },
+            {
+                name: 'CREATE_ROLE',
+                heading: "Role",
+                createdAt: new Date(),
+                updatedAt: new Date()
+            },
+            {
+                name: 'UPDATE_ROLE',
+                heading: "Role",
+                createdAt: new Date(),
+                updatedAt: new Date()
+            },
+            {
+                name: 'CREATE_RECHARGE',
+                heading: "Recharge",
+                createdAt: new Date(),
+                updatedAt: new Date()
+            },
+            {
+                name: 'UPDATE_RECHARGE',
+                heading: "Recharge",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
 
             {
-                name: 'CREATE_SOURCE',
-                code: 'CREATE_SOURCE',
-                heading: "Source",
+                name: 'CREATE_SHIPPING',
+                heading: "Shipping",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
             {
-                name: 'UPDATE_SOURCE',
-                code: 'UPDATE_SOURCE',
-                heading: "Source",
+                name: 'UPDATE_SHIPPING',
+                heading: "Shipping",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
             {
-                name: 'READ_SOURCE',
-                code: 'READ_SOURCE',
-                heading: "Source",
+                name: 'CREATE_COUPON',
+                heading: "Coupon",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
             {
-                name: 'DELETE_SOURCE',
-                code: 'DELETE_SOURCE',
-                heading: "Source",
+                name: 'UPDATE_COUPON',
+                heading: "Coupon",
+                createdAt: new Date(),
+                updatedAt: new Date()
+            },
+            {
+                name: 'CREATE_BANNER',
+                heading: "Banner",
+                createdAt: new Date(),
+                updatedAt: new Date()
+            },
+            {
+                name: 'DELETE_BANNER',
+                heading: "Banner",
+                createdAt: new Date(),
+                updatedAt: new Date()
+            },
+            {
+                name: 'UPDATE_RATING',
+                heading: "Rating",
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
 
-            {
-                name: 'CREATE_STATUS',
-                code: 'CREATE_STATUS',
-                heading: "Status",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'UPDATE_STATUS',
-                code: 'UPDATE_STATUS',
-                heading: "Status",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'READ_STATUS',
-                code: 'READ_STATUS',
-                heading: "Status",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'DELETE_STATUS',
-                code: 'DELETE_STATUS',
-                heading: "Status",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-
-            {
-                name: 'CREATE_BANK_DETAIL',
-                code: 'CREATE_BANK_DETAIL',
-                heading: "Bank Detail",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'UPDATE_BANK_DETAIL',
-                code: 'UPDATE_BANK_DETAIL',
-                heading: "Bank Detail",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'READ_BANK_DETAIL',
-                code: 'READ_BANK_DETAIL',
-                heading: "Bank Detail",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'DELETE_BANK_DETAIL',
-                code: 'DELETE_BANK_DETAIL',
-                heading: "Bank Detail",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-
-            {
-                name: 'CREATE_CONTACT_DETAIL',
-                code: 'CREATE_CONTACT_DETAIL',
-                heading: "Contact Detail",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'UPDATE_CONTACT_DETAIL',
-                code: 'UPDATE_CONTACT_DETAIL',
-                heading: "Contact Detail",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'READ_CONTACT_DETAIL',
-                code: 'READ_CONTACT_DETAIL',
-                heading: "Contact Detail",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
-            {
-                name: 'DELETE_CONTACT_DETAIL',
-                code: 'DELETE_CONTACT_DETAIL',
-                heading: "Contact Detail",
-                createdAt: new Date(),
-                updatedAt: new Date()
-            },
         ], {});
     },
 

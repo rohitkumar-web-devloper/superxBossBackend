@@ -1,5 +1,5 @@
 'use strict';
-const {Roles} = require('../models')
+const { Roles } = require('../models')
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
@@ -12,7 +12,7 @@ module.exports = {
         //  *   isBetaMember: false
         //  * }], {});
         // */
-        await queryInterface.bulkInsert('Roles',   [
+        await queryInterface.bulkInsert('Roles', [
             {
                 name: "admin",
                 isActive: 1,
@@ -26,13 +26,7 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                name: "teamLeader",
-                isActive: 1,
-                createdAt: new Date(),
-                updatedAt: new Date(),
-            },
-            {
-                name: "teleCaller",
+                name: "staff",
                 isActive: 1,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -48,7 +42,7 @@ module.exports = {
          * Example:
          * await queryInterface.bulkDelete('People', null, {});
          */
-     await queryInterface.bulkDelete('Roles', null, {});
+        await queryInterface.bulkDelete('Roles', null, {});
 
     }
 };

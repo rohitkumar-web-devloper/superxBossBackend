@@ -6,16 +6,17 @@ const { validate } = require("../../helper/validation")
 const { success, wrapRequestHandler, error } = require("../../helper/response")
 const { uploadImage } = require('../Helper')
 const fs = require('fs')
+const { Create_Banner } = require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
     try {
         const { image } = req?.files
-            const ImageUpload = await uploadImage(image, "upload/banner/")
-            if (ImageUpload) {
-                await Banner.create({ image: ImageUpload })
-            }
-            return res.json(success("Banner Createed"))
+        const ImageUpload = await uploadImage(image, "upload/banner/")
+        if (ImageUpload) {
+            await Banner.create({ image: ImageUpload })
+        }
+        return res.json(success("Banner Createed"))
     } catch (e) {
         return res.json(error("Please select image"))
     }
 }
-createRouter.post("/banner-create", TokenVerify(), wrapRequestHandler(handler));
+createRouter.post("/banner-create", TokenVerify(), Create_Banner, wrapRequestHandler(handler));

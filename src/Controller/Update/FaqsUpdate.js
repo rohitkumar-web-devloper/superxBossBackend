@@ -3,6 +3,7 @@ const { Faqs } = require("../../models")
 const TokenVerify = require("../../Middleware/TokenVerify")
 const { success, wrapRequestHandler } = require("../../helper/response")
 const { validate } = require("../../helper/validation")
+const { Update_Faq } = require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
     try {
         const { status, question, answer, id } = req?.body
@@ -27,4 +28,4 @@ const handler = async (req, res) => {
         res.json(error("Faqs Update Error", e))
     }
 }
-updateRouter.put('/faqs-update', TokenVerify(), wrapRequestHandler(handler))
+updateRouter.put('/faqs-update', TokenVerify(), Update_Faq, wrapRequestHandler(handler))

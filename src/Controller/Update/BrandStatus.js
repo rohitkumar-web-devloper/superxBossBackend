@@ -1,10 +1,12 @@
-const {updateRouter} = require('../../Routes/updateRoutes')
-const {Brand} = require("../../models")
+const { updateRouter } = require('../../Routes/updateRoutes')
+const { Brand } = require("../../models")
 const TokenVerify = require("../../Middleware/TokenVerify")
-const {success, wrapRequestHandler, error} = require("../../helper/response")
+const { success, wrapRequestHandler, error } = require("../../helper/response")
+const { Update_Brand } = require('../../Middleware/PermissionCheck')
+
 const handler = async (req, res) => {
     try {
-        const data = await Brand.update({status: !req.body.statusId}, {
+        const data = await Brand.update({ status: !req.body.statusId }, {
             where: {
                 id: req.body.brandId,
             }
@@ -15,4 +17,4 @@ const handler = async (req, res) => {
         res.json(error("Status is not update", e))
     }
 }
-updateRouter.put('/brand-status', TokenVerify(), wrapRequestHandler(handler))
+updateRouter.put('/brand-status', TokenVerify(), Update_Brand, wrapRequestHandler(handler))

@@ -1,11 +1,11 @@
-const {updateRouter} = require('../../Routes/updateRoutes')
-const {Categories} = require("../../models")
+const { updateRouter } = require('../../Routes/updateRoutes')
+const { Categories } = require("../../models")
 const TokenVerify = require("../../Middleware/TokenVerify")
-const {success, wrapRequestHandler} = require("../../helper/response")
-
+const { success, wrapRequestHandler } = require("../../helper/response")
+const { Update_Category } = require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
 
-    const data = await Categories.update({featured: !req.body.featuredId}, {
+    const data = await Categories.update({ featured: !req.body.featuredId }, {
         where: {
             id: req.body.catId,
 
@@ -16,4 +16,4 @@ const handler = async (req, res) => {
     }
 
 }
-updateRouter.put('/featuredUpdate', TokenVerify(), wrapRequestHandler(handler))
+updateRouter.put('/featuredUpdate', TokenVerify(), Update_Category, wrapRequestHandler(handler))

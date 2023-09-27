@@ -1,12 +1,13 @@
-const {updateRouter} = require('../../Routes/updateRoutes')
-const {Categories} = require("../../models")
-const {body} = require('express-validator')
+const { updateRouter } = require('../../Routes/updateRoutes')
+const { Categories } = require("../../models")
+const { body } = require('express-validator')
 const TokenVerify = require("../../Middleware/TokenVerify")
-const {success, wrapRequestHandler} = require("../../helper/response")
-const {validate} = require("../../helper/validation")
+const { success, wrapRequestHandler } = require("../../helper/response")
+const { validate } = require("../../helper/validation")
+const { Update_Category } = require('../../Middleware/PermissionCheck')
 // its api use in update category and subCategory
 const handler = async (req, res) => {
-    const {name , catId} = req.body
+    const { name, catId } = req.body
     const editData = await Categories.update(req.body, {
         where: {
             id: req.body.catId
@@ -15,6 +16,6 @@ const handler = async (req, res) => {
     res.json(success(("Category update")))
 }
 
-updateRouter.put('/editCategory', TokenVerify(), validate([
+updateRouter.put('/editCategory', TokenVerify(), Update_Category, validate([
     body("name").notEmpty().withMessage("Name is require"),
 ]), wrapRequestHandler(handler))

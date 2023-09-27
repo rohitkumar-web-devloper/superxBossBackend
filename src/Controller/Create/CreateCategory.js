@@ -1,12 +1,12 @@
-const {createRouter} = require('../../Routes/createRoutes')
-const {Categories, User} = require("../../models")
+const { createRouter } = require('../../Routes/createRoutes')
+const { Categories, User } = require("../../models")
 const TokenVerify = require("../../Middleware/TokenVerify")
-const {body} = require('express-validator');
-const {validate} = require("../../helper/validation")
-const {success, wrapRequestHandler, error} = require("../../helper/response")
-
+const { body } = require('express-validator');
+const { validate } = require("../../helper/validation")
+const { success, wrapRequestHandler, error } = require("../../helper/response")
+const { Create_Category } = require("../../Middleware/PermissionCheck")
 const handler = async (req, res) => {
-    const {name, description} = req.body;
+    const { name, description } = req.body;
     try {
         const exist = await Categories.findOne({
             where: {
@@ -33,6 +33,6 @@ const handler = async (req, res) => {
 
 
 }
-createRouter.post("/createCategory", TokenVerify(), validate([
+createRouter.post("/createCategory", TokenVerify(), Create_Category, validate([
     body("name").notEmpty().withMessage("Name is required field"),
 ]), wrapRequestHandler(handler));

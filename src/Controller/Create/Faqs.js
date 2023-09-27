@@ -4,7 +4,7 @@ const TokenVerify = require("../../Middleware/TokenVerify")
 const { body } = require('express-validator');
 const { validate } = require("../../helper/validation")
 const { success, wrapRequestHandler, error } = require("../../helper/response")
-
+const { Create_Faq } = require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
     const { question, answer } = req.body;
     try {
@@ -14,7 +14,7 @@ const handler = async (req, res) => {
         return res.json(error("Enter Valid Details", e))
     }
 }
-createRouter.post("/faqs-create", TokenVerify(), validate([
+createRouter.post("/faqs-create", TokenVerify(), Create_Faq, validate([
     body("question").notEmpty().withMessage("Question is required"),
     body("answer").notEmpty().withMessage("Answer is required")
 ]), wrapRequestHandler(handler));

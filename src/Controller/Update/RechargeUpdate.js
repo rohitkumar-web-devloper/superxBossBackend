@@ -2,6 +2,7 @@ const { updateRouter } = require('../../Routes/updateRoutes')
 const { Recharges } = require("../../models")
 const TokenVerify = require("../../Middleware/TokenVerify")
 const { success, wrapRequestHandler, error } = require("../../helper/response")
+const { Update_Recharge } = require("../../Middleware/PermissionCheck")
 const handler = async (req, res) => {
     try {
         const { amount, offer_amount, id, status } = req?.body
@@ -26,4 +27,4 @@ const handler = async (req, res) => {
         res.json(error("Recharge is not update", e))
     }
 }
-updateRouter.put('/recharge-update', TokenVerify(), wrapRequestHandler(handler))
+updateRouter.put('/recharge-update', TokenVerify(), Update_Recharge, wrapRequestHandler(handler))

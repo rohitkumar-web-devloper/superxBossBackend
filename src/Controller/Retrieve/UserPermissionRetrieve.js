@@ -1,12 +1,12 @@
-const {retrieveRouter} = require('../../Routes/retrieveRouter')
-const {UserPermissions} = require("../../models")
+const { retrieveRouter } = require('../../Routes/retrieveRouter')
+const { UserPermissions } = require("../../models")
 const TokenVerify = require("../../Middleware/TokenVerify")
-const {success, wrapRequestHandler, error} = require("../../helper/response")
+const { success, wrapRequestHandler, error } = require("../../helper/response")
 
 const handler = async (req, res) => {
     try {
-        const userPermissions = await UserPermissions.findOne({
-            attributes:['user_id' , 'permission_id'],
+        const userPermissions = await UserPermissions.findAll({
+            attributes: ['user_id', 'permission_id'],
             where: {
                 user_id: req.query.user_id
             }
