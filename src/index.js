@@ -9,4 +9,4 @@ const {cronCoupon} = require('./CronTabCouponStatus')
 cronCoupon()
 app.listen(PORT, (err) => {
     console.log(`Server run on port no. ${PORT}`)
-})
+})  

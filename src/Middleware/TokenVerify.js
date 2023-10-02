@@ -12,7 +12,7 @@ const TokenVerify = () => async (req, res, next) => {
         const user = await jwt.verify(token_id, process.env.APP_TOKEN_KEY);
     } catch (e) {
         return res.status(401).send(error(errorMessage))
-    }
+    }   
 
     const token = await User.findOne({
         where: {
