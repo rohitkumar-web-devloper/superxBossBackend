@@ -25,11 +25,14 @@ module.exports = {
             type: {
                 type: Sequelize.STRING(20)
             },
-            featured: {
+            brand_day: {
                 type: Sequelize.BOOLEAN
             },
-            sorting:{
-                type :Sequelize.INTEGER
+            brand_day_offer: {
+                type: Sequelize.INTEGER
+            },
+            sorting: {
+                type: Sequelize.INTEGER
             },
             status: {
                 type: Sequelize.BOOLEAN

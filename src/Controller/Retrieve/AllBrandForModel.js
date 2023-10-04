@@ -5,7 +5,6 @@ const { success, wrapRequestHandler, error } = require("../../helper/response")
 
 const handler = async (req, res) => {
     try {
-        console.log(req.body)
         const brand = await Brand.findAll({
             attributes: ['id', "name"],
             where: {
@@ -13,7 +12,6 @@ const handler = async (req, res) => {
             }
         })
         res.json(success("Spare Parts Brands Retrieve ", brand))
-
     } catch (e) {
         res.status(400).json(error("Spare Parts Brands Retrieve Error", e))
     }

@@ -8,7 +8,7 @@ const { Created_Brand } = require('../../Middleware/PermissionCheck')
 
 
 const handler = async (req, res) => {
-  const { name, description, type } = req.body;
+  const { name, description, type, brand_day_offer } = req.body;
   try {
     const exist = await Brand.findOne({
       where: {
@@ -22,7 +22,8 @@ const handler = async (req, res) => {
         type,
         logo: "default-image.jpg",
         status: true,
-        featured: false,
+        brand_day: false,
+        brand_day_offer,
         user_id: req.login_token?.id,
       });
       return res.json(success("Brand Created"));

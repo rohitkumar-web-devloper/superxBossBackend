@@ -18,7 +18,7 @@ const handler = async (req, res) => {
         }
         else {
             customers = await Customers.findAll({
-                attributes: ["id", "first_name", "fcm_token"],
+                attributes: ["id", "first_name",],
             })
         }
         res.json(success("Customer Retrieve", customers))

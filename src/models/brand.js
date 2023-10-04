@@ -11,16 +11,16 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            Brand.belongsTo(models.User , {
+            Brand.belongsTo(models.User, {
                 foreignKey: "user_id",
                 as: "user",
             });
-            Brand.hasOne(models.Vehicle_segments , {
+            Brand.hasOne(models.Vehicle_segments, {
                 foreignKey: "brand_id",
                 as: "compData",
             });
-            
-            
+
+
 
         }
     }
@@ -41,8 +41,11 @@ module.exports = (sequelize, DataTypes) => {
         type: {
             type: DataTypes.STRING,
         },
-        featured: {
+        brand_day: {
             type: DataTypes.BOOLEAN,
+        },
+        brand_day_offer: {
+            type: DataTypes.INTEGER,
         },
         sorting: {
             type: DataTypes.INTEGER,
