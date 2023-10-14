@@ -9,7 +9,7 @@ const handler = async (req, res) => {
       attributes: ["id", "name"],
       order: [["name", "ASC"]],
       where: {
-        type: ["Vehicle", "vehicle + Spare Part"],
+        type: ["Vehicle", "vehicle_SparePart"],
         status: true,
       },
     });

@@ -21,7 +21,6 @@ const handler = async (req, res) => {
                 }
             ]
         })
-        console.log(product)
         res.json(success("New Arrival Retrieve", product))
     } catch (err) {
         res.json(error("New Arrival Retrieve Error", err))

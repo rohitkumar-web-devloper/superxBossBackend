@@ -2,7 +2,7 @@ const { retrieveRouter } = require('../../Routes/retrieveRouter')
 const { Products, Brand, ProductImage, ProductBulkDiscount, VehicleSegmentType } = require("../../models")
 const TokenVerify = require("../../Middleware/TokenVerify")
 const { success, wrapRequestHandler, error } = require("../../helper/response")
-const vehiclesegmenttype = require('../../models/vehiclesegmenttype')
+// const vehiclesegmenttype = require('../../models/vehiclesegmenttype')
 
 const handler = async (req, res) => {
     const page = req.query.page
@@ -29,11 +29,11 @@ const handler = async (req, res) => {
                     model: ProductBulkDiscount,
                     as: "bulkDiscount"
                 },
-                {
-                    attributes: ["name"],
-                    model: VehicleSegmentType,
-                    as: "segment"
-                }
+                // {
+                //     attributes: ["name"],
+                //     model: VehicleSegmentType,
+                //     as: "segment"
+                // }
             ]
         })
         const count = await Products.count()

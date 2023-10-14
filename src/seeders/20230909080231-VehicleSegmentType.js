@@ -12,7 +12,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('vehiclesegmenttypes', [
+    await queryInterface.bulkInsert('VehicleSegmentTypes', [
       {
         name: "heavy commercial vehicle",
         icon: "default-image.jpg",

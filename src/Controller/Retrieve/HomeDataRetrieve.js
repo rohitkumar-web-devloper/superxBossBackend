@@ -1,5 +1,5 @@
 const { retrieveRouter } = require('../../Routes/retrieveRouter')
-const { Categories, Products, Brand, ProductImage, Customers, VehicleSegmentType, Rating ,Coupon ,Banner} = require("../../models")
+const { Categories, Products, Brand, ProductImage, Customers, VehicleSegmentType, Rating, Coupon, Banner } = require("../../models")
 const AppTokenVerify = require("../../Middleware/AppTokenVarify")
 const { success, wrapRequestHandler, error } = require("../../helper/response")
 
@@ -31,9 +31,9 @@ const handler = async (req, res) => {
         const brand = await Brand.findAll({
             attributes: ['id', "name", "logo"],
             where: {
-                type: ["Spare Parts" ,"vehicle + Spare Part"],
+                type: ["Spare Parts", "vehicle + Spare Part"],
                 status: true
-                
+
             },
 
         })
@@ -57,7 +57,8 @@ const handler = async (req, res) => {
         const vehicleBrand = await Brand.findAll({
             attributes: ['id', "name", "logo"],
             where: {
-                type: "Vehicle"
+                type :"vehiclec"
+                // [Op.and]: [{ type: "vehicle" }, { type: "vehicle_SparePart", }],
             },
         })
         const popItemProduct = await Products.findAll({
@@ -84,17 +85,17 @@ const handler = async (req, res) => {
             }
         })
         const rating = await Rating.findAll({
-            attributes: ['year' , "category" , "user","rating"],
+            attributes: ['year', "category", "user", "rating"],
         })
         const coupon = await Coupon.findAll({
-            where:{
+            where: {
                 status: true
             }
         })
         const banner = await Banner.findAll({
-            attributes:["id" , "image"]
+            attributes: ["id", "image"]
         })
-        res.json(success("Trending Parts Retrieve", { categories: categories, trendingProduct: product, spareBrand: brand, newArrival: newArrival, vehicleBrand: vehicleBrand, popItemProduct: popItemProduct, userPoint: userPoint, rating: rating , coupon :coupon ,banner:banner}))
+        res.json(success("Trending Parts Retrieve", { categories: categories, trendingProduct: product, spareBrand: brand, newArrival: newArrival, vehicleBrand: vehicleBrand, popItemProduct: popItemProduct, userPoint: userPoint, rating: rating, coupon: coupon, banner: banner }))
 
     } catch (err) {
         res.status(400).json(error("Category Retrieve Error", err))

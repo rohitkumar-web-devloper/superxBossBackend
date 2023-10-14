@@ -129,6 +129,17 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+          {
+              user_id: 1,
+              permission_id: 23,
+              createdAt: new Date(),
+              updatedAt: new Date(),
+          }, {
+          user_id: 1,
+          permission_id: 24,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+      },
       ],
       {}
     );
