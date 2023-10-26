@@ -57,7 +57,7 @@ const handler = async (req, res) => {
         const vehicleBrand = await Brand.findAll({
             attributes: ['id', "name", "logo"],
             where: {
-                type :"vehiclec"
+                type :"vehicle"
                 // [Op.and]: [{ type: "vehicle" }, { type: "vehicle_SparePart", }],
             },
         })

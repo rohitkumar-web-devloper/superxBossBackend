@@ -4,7 +4,6 @@ const AppTokenVarify = require("../../Middleware/AppTokenVarify")
 const { success, wrapRequestHandler, error } = require("../../helper/response")
 
 const handler = async (req, res) => {
-
     try {
         const product = await Products.findAll({
             where: {

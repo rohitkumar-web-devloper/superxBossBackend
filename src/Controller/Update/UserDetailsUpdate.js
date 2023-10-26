@@ -9,19 +9,20 @@ const handler = async (req, res) => {
     try {
         const Image = req.files?.profile_picture
         let setImage
-        const { name, mobile, email, whats_app, address } = req.body
-        const data = await User.update({ name, mobile, email, whats_app, address }, {
+        const { name, mobile, email, whats_app, address, id, role, status } = req.body
+        const data = await User.findOne({
             where: {
-                id: req.login_token?.id,
-            }
+                id: id || req.login_token.id
+            },
         })
+        data.name = name || data.name
+        data.mobile = mobile || data.mobile
+        data.email = email || data.email
+        data.whats_app = whats_app || data.whats_app
+        data.address = address || data.address
+        data.role = role || data.role
+        data.status = !status
         if (Image) {
-            const data = await User.findOne({
-                attributes: ["profile_picture"],
-                where: {
-                    id: req.login_token.id,
-                },
-            })
             if (data.profile_picture != "default-image.jpg") {
                 fs.unlink(`assets/upload/user/${data.profile_picture}`, (err) => {
                     if (err) {
@@ -33,15 +34,10 @@ const handler = async (req, res) => {
                 })
             }
             const ImageUpload = await uploadImage(Image, "upload/user/")
-            setImage = await User.update({ profile_picture: ImageUpload }, {
-                where: {
-                    id: req.login_token.id,
-                }
-            })
+            data.profile_picture = ImageUpload || data.profile_picture
         }
-        if (data || setImage) {
-            res.json(success("User update"))
-        }
+        await data.save()
+        res.json(success("User update", data))
     } catch (e) {
         res.json(error("Enter valid Details", e))
     }

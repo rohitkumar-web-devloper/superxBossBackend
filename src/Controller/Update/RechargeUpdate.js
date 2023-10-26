@@ -6,22 +6,19 @@ const { Update_Recharge } = require("../../Middleware/PermissionCheck")
 const handler = async (req, res) => {
     try {
         const { amount, offer_amount, id, status } = req?.body
+        const exist = await Recharges.findOne({
+            where: {
+                id
+            }
+        })
         if (typeof status == "boolean") {
-            const recharge = await Recharges.update({ status: !status }, {
-                where: {
-                    id: id
-                }
-            })
+            exist.status = !status
         } else {
-            const recharge = await Recharges.update({ amount: +amount, offer_amount: +offer_amount }, {
-                where: {
-                    id: id
-                }
-            })
+            exist.amount = +amount
+            exist.offer_amount = +offer_amount
         }
-
-
-        return res.json(success("Recharge update"))
+        exist.save()
+        return res.json(success("Recharge update", exist))
     } catch (e) {
         // console.log(' Error Occur when Brand Status Update', e.message)
         res.json(error("Recharge is not update", e))

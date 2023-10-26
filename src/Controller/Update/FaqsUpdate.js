@@ -7,23 +7,19 @@ const { Update_Faq } = require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
     try {
         const { status, question, answer, id } = req?.body
-        console.log(req.body)
-        console.log(typeof status)
+        const exist = await Faqs.findOne({
+            where: {
+                id
+            }
+        })
         if (typeof (status) == 'boolean') {
-            const result = await Faqs.update({ status: !status }, {
-                where: {
-                    id
-                }
-            })
+            exist.status = !status
         } else {
-            const result = await Faqs.update({ question: question, answer: answer }, {
-                where: {
-                    id
-                }
-            })
+            exist.question = question
+            exist.answer = answer
         }
-
-        res.json(success("Faqs Update"))
+        await exist.save()
+        res.json(success("Faqs Update", exist))
     } catch (e) {
         res.json(error("Faqs Update Error", e))
     }

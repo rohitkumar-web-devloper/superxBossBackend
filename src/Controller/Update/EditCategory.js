@@ -7,15 +7,21 @@ const { validate } = require("../../helper/validation")
 const { Update_Category } = require('../../Middleware/PermissionCheck')
 // its api use in update category and subCategory
 const handler = async (req, res) => {
-    const { name, catId } = req.body
-    const editData = await Categories.update(req.body, {
+    const { name, catId, description, featuredId, statusId } = req.body
+    const editData = await Categories.findOne({
         where: {
             id: req.body.catId
         }
     })
-    res.json(success(("Category update")))
+    if (typeof featuredId == 'boolean') {
+        editData.featured = !req.body.featuredId;
+    }
+    if (typeof statusId == 'boolean') {
+        editData.status = !statusId
+    }
+    editData.name = name || editData.name
+    editData.description = description || editData.description
+    await editData.save()
+    res.json(success("Category update", editData))
 }
-
-updateRouter.put('/editCategory', TokenVerify(), Update_Category, validate([
-    body("name").notEmpty().withMessage("Name is require"),
-]), wrapRequestHandler(handler))
+updateRouter.put('/edit-category', TokenVerify(), Update_Category, wrapRequestHandler(handler))

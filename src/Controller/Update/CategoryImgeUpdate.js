@@ -13,11 +13,9 @@ const handler = async (req, res) => {
         const { image } = req.files
         if (image != null) {
             const data = await Categories.findOne({
-                attributes: ["icon"],
                 where: {
-                    id: req.body.id
+                    id: +req.body.id
                 },
-
             })
             if (data.icon !== "default-image.jpg") {
                 fs.unlink(`assets/upload/categories/${data.icon}`, (err) => {
@@ -30,14 +28,12 @@ const handler = async (req, res) => {
                 })
             }
             const ImageUpload = await uploadImage(image, "upload/categories/")
-            const setImage = await Categories.update({ icon: ImageUpload }, {
-                where: {
-                    id: req.body.id
-                }
-            })
-            if (setImage) {
-                res.json(success(("mage Upload Successfully")))
-            }
+            data.icon = `${ImageUpload}` || data.icon;
+            await data.save()
+            res.json(success("Image Upload Successfully", data))
+        } else {
+            res.status(400).json(error("Please Select Image"))
+
         }
     } catch (e) {
         res.status(400).json(error("Please Select Image"))

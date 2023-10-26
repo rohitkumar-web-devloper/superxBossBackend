@@ -24,7 +24,7 @@ const handler = async (req, res) => {
                 featured: false,
                 user_id: req.login_token?.id
             })
-            return res.json(success("Category Created"))
+            return res.json(success("Category Created" , category))
         }
 
     } catch (e) {

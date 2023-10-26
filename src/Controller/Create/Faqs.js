@@ -9,7 +9,7 @@ const handler = async (req, res) => {
     const { question, answer } = req.body;
     try {
         const faqs = await Faqs.create({ question: question, answer: answer, status: true, user_id: req.login_token.id })
-        return res.json(success("Faqs Created"))
+        return res.json(success("Faqs Created" , faqs))
     } catch (e) {
         return res.json(error("Enter Valid Details", e))
     }

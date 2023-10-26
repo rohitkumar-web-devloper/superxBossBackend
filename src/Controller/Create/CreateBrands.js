@@ -26,7 +26,7 @@ const handler = async (req, res) => {
         brand_day_offer,
         user_id: req.login_token?.id,
       });
-      return res.json(success("Brand Created"));
+      return res.json(success("Brand Created", category));
     } else {
       return res.json(error("Brand is Already Exist"));
     }

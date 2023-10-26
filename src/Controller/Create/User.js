@@ -26,7 +26,6 @@ const handler = async (req, res) => {
             })
             if (rolePermission) {
                 rolePermission.map(async (item, index) => {
-                    // console.log(item.permission_id, `-----------------------------${index}`)
                     const setuserPermission = await UserPermissions.create({ permission_id: item.permission_id, user_id: user.id })
                 })
             }
@@ -45,5 +44,4 @@ createRouter.post("/user-create", TokenVerify(), Create_User, validate([
     body("address").notEmpty().withMessage("Address is requried"),
     body("password").notEmpty().withMessage("Password is requried"),
     body("role").notEmpty().withMessage("Role is requried"),
-
 ]), wrapRequestHandler(handler));
