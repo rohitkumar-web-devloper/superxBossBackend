@@ -28,11 +28,17 @@ module.exports = {
             wallet_amount: {
                 type: Sequelize.STRING(50)
             },
-            status:{
-                type :Sequelize.BOOLEAN
+            refer_code: {
+                type: Sequelize.STRING(50)
             },
-            point:{
-                type : Sequelize.INTEGER
+            refrence_code: {
+                type: Sequelize.STRING(50)
+            },
+            status: {
+                type: Sequelize.BOOLEAN
+            },
+            point: {
+                type: Sequelize.INTEGER
             },
             language: {
                 type: Sequelize.STRING(150)

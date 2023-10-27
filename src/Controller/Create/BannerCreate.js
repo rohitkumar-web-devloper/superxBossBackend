@@ -12,7 +12,7 @@ const handler = async (req, res) => {
         const { image } = req?.files
         const ImageUpload = await uploadImage(image, "upload/banner/")
         if (ImageUpload) {
-            const banner = await Banner.create({ image: ImageUpload })
+            const banner = await Banner.create({ image: ImageUpload, product_id: req.body.ids })
             return res.json(success("Banner Createed", banner))
         }
     } catch (e) {

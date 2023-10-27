@@ -6,7 +6,7 @@ const { success, wrapRequestHandler, error } = require("../../helper/response")
 const handler = async (req, res) => {
     try {
         const banner = await Banner.findAll({
-            attributes: ["image" , "id"],
+            attributes: ["image", "id", "product_id"],
         })
         res.json(success("Banner Retrieve", banner))
     } catch (err) {

@@ -93,7 +93,7 @@ const handler = async (req, res) => {
             }
         })
         const banner = await Banner.findAll({
-            attributes: ["id", "image"]
+            attributes: ["id", "image" , "product_id"]
         })
         res.json(success("Trending Parts Retrieve", { categories: categories, trendingProduct: product, spareBrand: brand, newArrival: newArrival, vehicleBrand: vehicleBrand, popItemProduct: popItemProduct, userPoint: userPoint, rating: rating, coupon: coupon, banner: banner }))
 

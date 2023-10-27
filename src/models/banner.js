@@ -11,10 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
     }
   }
   Banner.init({
     image: DataTypes.STRING,
+    product_id: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Banner',

@@ -1,7 +1,7 @@
-const {retrieveRouter} = require('../../Routes/retrieveRouter')
-const {Categories, User} = require("../../models")
+const { retrieveRouter } = require('../../Routes/retrieveRouter')
+const { Categories, User } = require("../../models")
 const AppTokenVerify = require("../../Middleware/AppTokenVarify")
-const {success, wrapRequestHandler, error} = require("../../helper/response")
+const { success, wrapRequestHandler, error } = require("../../helper/response")
 
 const handler = async (req, res) => {
     try {

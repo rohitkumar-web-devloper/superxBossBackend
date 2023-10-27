@@ -14,12 +14,12 @@ const handler = async (req, res) => {
         if (typeof status == 'boolean') {
             exist.status = !status
         }
-        exist.code = code
-        exist.amount = amount
-        exist.min_cart_amt = min_cart_amt
-        exist.description = description
-        exist.start_date = start_date
-        exist.end_date = end_date
+        exist.code = code || exist.code
+        exist.amount = amount || exist.amount
+        exist.min_cart_amt = min_cart_amt || exist.min_cart_amt
+        exist.description = description || exist.description
+        exist.start_date = start_date || exist.start_date
+        exist.end_date = end_date || exist.end_date
         await exist.save()
         res.json(success("Coupon update", exist))
     } catch (e) {

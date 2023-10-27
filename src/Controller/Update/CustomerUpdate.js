@@ -1,17 +1,33 @@
-const {updateRouter} = require('../../Routes/updateRoutes')
-const {Customers} = require("../../models")
+const { updateRouter } = require('../../Routes/updateRoutes')
+const { Customers } = require("../../models")
 const AppTokenVerify = require("../../Middleware/AppTokenVarify")
-const {success, wrapRequestHandler, error} = require("../../helper/response")
-const {validate} = require("../../helper/validation")
-const {body} = require('express-validator');
+const { success, wrapRequestHandler, error } = require("../../helper/response")
+const { validate } = require("../../helper/validation")
+const { body } = require('express-validator');
 const handler = async (req, res) => {
     try {
-        let data = await Customers.update(req.body, {
+        console.log(req.body)
+        const { first_name, last_name, email, refer_code, refrence_code, business_type, type, business_name, gst_number, business_contact_no, state, language, mobile } = req.body
+        const exist = await Customers.findOne({
             where: {
-                mobile: req.body.mobile
+                id: req.login_token.id
             }
         })
-        res.json(success("User Fill Information"))
+        exist.first_name = first_name || exist.first_name
+        exist.last_name = last_name || exist.last_name
+        exist.email = email || exist.email
+        exist.refer_code = refer_code || exist.refer_code
+        exist.refrence_code = refrence_code || exist.refrence_code
+        exist.business_type = business_type || exist.business_type
+        exist.type = type || exist.type
+        exist.business_name = business_name || exist.business_name
+        exist.gst_number = gst_number || exist.gst_number
+        exist.business_contact_no = business_contact_no || exist.business_contact_no
+        exist.state = state || exist.state
+        exist.language = language || exist.language
+        exist.mobile = mobile || exist.mobile
+        await exist.save()
+        res.json(success("User Fill Information", exist))
     } catch (err) {
         res.json(error("User Fill Information Error"))
     }

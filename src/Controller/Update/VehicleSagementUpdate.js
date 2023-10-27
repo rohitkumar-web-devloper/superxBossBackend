@@ -6,15 +6,18 @@ const { success, wrapRequestHandler } = require("../../helper/response")
 const { validate } = require("../../helper/validation")
 const { Update_Vehicle } = require('../../Middleware/PermissionCheck')
 const handler = async (req, res) => {
-    const { name, catId } = req.body
-    const editData = await Vehicle_segments.update(req.body, {
+    const { description, vehicleId, name, status } = req.body
+    const exist = await Vehicle_segments.findOne({
         where: {
-            id: req.body.vehicleId
+            id: vehicleId
         }
     })
-    res.json(success(("Vehicle update")))
+
+    exist.status = status == true ? false : true || exist.status
+    exist.name = name || exist.name
+    exist.description = description || exist.description
+    exist.save()
+    res.json(success("Vehicle update", exist))
 }
 
-updateRouter.put('/edit-vehicle', TokenVerify(), Update_Vehicle, validate([
-    body("name").notEmpty().withMessage("Name is require"),
-]), wrapRequestHandler(handler))
+updateRouter.put('/edit-vehicle', TokenVerify(), Update_Vehicle, wrapRequestHandler(handler))
